@@ -1,11 +1,18 @@
-import CommentThreads as ct
+# Importing packages
+import functions.CommentThreads as ct
 import csv
 import pandas as pd
 
-key = 'AIzaSyD2rSHON0Moknt9H5Jegf06MggNv64PhqU'
-videoId = 'D_xftS6ydXQ'
+# videoId = '85YoGesq-UQ'
+key = input('Insert your own key: ')
+video = input('Insert the video URL: ')
+videoId = video.split('=')
+videoId = videoId[1]
 
-# Comment parents in a list
+print('Downloading...')
+
+# COMMENTS
+## Comment parents in a list
 nextToken = None
 snippet = []
 while True:
@@ -19,16 +26,15 @@ while True:
     if not nextToken:
         break
 
-# List of comment parents in a Data frame
+## List of comment parents in a Data frame
 df = pd.DataFrame(snippet)
 
-print(df)
-print(df.keys())
-
-# Saving in a CSV
+## Saving in a CSV
 df.to_csv(r'./comments_parent.csv', encoding='utf-8-sig')
+print('The table "comments_parents.csv" is saved.')
 
-# Comment replies in a list
+# REPLIES
+## Comment replies in a list
 nextToken = None
 replies = []
 while True:
@@ -43,11 +49,9 @@ while True:
     if not nextToken:
         break
 
-# List of comment replies in a Data frame
+## List of comment replies in a Data frame
 df = pd.DataFrame(replies)
 
-print(df)
-print(df.keys())
-
-# Saving in a CSV
+## Saving in a CSV
 df.to_csv(r'./comments_replies.csv', encoding='utf-8-sig')
+print('The table "comments_replies.csv" is saved.')
