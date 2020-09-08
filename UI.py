@@ -1,4 +1,4 @@
-import youtube_api as yb
+import functions.youtube_api as yb
 import tkinter as tk
 
 
