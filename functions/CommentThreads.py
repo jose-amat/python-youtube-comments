@@ -21,17 +21,19 @@ def parentsDataFrame(key, videoId):
   snippet = []
   while True:
       response = callAPI(key, videoId, 'snippet', nextToken)
-      
-      for value in response.json()['items']:
+      json = response.json()
+
+      for value in json['items']:
           snippet.append(value['snippet']['topLevelComment']['snippet'])
       
-      nextToken = response.json()['nextPageToken'] if 'nextPageToken' in response.json().keys() else None
+      nextToken = json['nextPageToken'] if 'nextPageToken' in json.keys() and (len(json['items']) > 0) else None
 
       if not nextToken:
           break
 
   ## List of comment parents in a Data frame
   df = pd.DataFrame(snippet)
+  df = dropColumns(df)
   return df
 
 def repliesDataFrame(key, videoId):
@@ -40,19 +42,30 @@ def repliesDataFrame(key, videoId):
   replies = []
   while True:
       response = callAPI(key, videoId, 'replies', nextToken)
-      for value in response.json()['items']:
+      json = response.json()
+
+      for value in json['items']:
           if 'replies' in value.keys():
               for comment in value['replies']['comments']:
                   replies.append(comment['snippet'])
       
-      nextToken = response.json()['nextPageToken'] if 'nextPageToken' in response.json().keys() else None
+      nextToken = json['nextPageToken'] if 'nextPageToken' in json.keys() else None
 
       if not nextToken:
           break
 
   ## List of comment replies in a Data frame
   df = pd.DataFrame(replies)
+  df = dropColumns(df)
   return df
+
+def dropColumns(df):
+    dropCol = ['authorProfileImageUrl', 'authorChannelUrl', 'authorChannelId', 'canRate', 'viewerRating']
+    
+    for col in dropCol:
+        df = df.drop(col, 1)
+    return df
+
 
 def dataFrameToCSV(df, isParent):
   if isParent is True:
