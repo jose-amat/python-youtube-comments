@@ -16,7 +16,7 @@ def callAPI(key, channelId):
                                 'key': key,
                                 'part': 'id,snippet',
                                 'channelId': channelId,
-                                'maxResults': 21,
+                                'maxResults': 6,
                                 'order': 'viewCount'
                                 })
 

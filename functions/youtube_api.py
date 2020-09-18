@@ -37,3 +37,9 @@ def youtubeComments(key, videosIds):
         df = pd.concat([data, df])
 
     ct.dataFrameToCSV(df, False)
+
+def commentsPerChannel(key, channelId):
+    videoId = videosIds(key, channelId)
+
+    youtubeComments(key, videoId)
+    print("FINISHED!")

@@ -7,20 +7,20 @@ window.title('Python Youtube comments')
 window['background'] = 'red'
 
 tk.Label(window, text="API Key").grid(row=0)
-tk.Label(window, text="Video URL").grid(row=1)
+tk.Label(window, text="Channel ID").grid(row=1)
 
 key = tk.Entry(window)
-url = tk.Entry(window)
+channelId = tk.Entry(window)
 
 
 def enter():
   lb['text'] = 'Loading...'
-  yb.youtubeComments(key.get(), url.get())
+  yb.commentsPerChannel(key.get(), channelId.get())
   lb['text'] = 'Finished.'
   print('Finished.')
 
 key.grid(row=0, column=1)
-url.grid(row=1, column=1)
+channelId.grid(row=1, column=1)
 
 quitBtn = tk.Button(window, width=5, text="Quit", command=window.quit).grid(row=3,
                                                   column=1,
