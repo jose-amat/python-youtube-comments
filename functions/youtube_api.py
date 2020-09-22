@@ -1,15 +1,16 @@
 # Importing packages
 import functions.CommentThreads as ct
 import functions.search as search
+import functions.videos as videos
 import pandas as pd
 
 
 # Returns the videos ids in a Data Frame
-def videosIds(key, channelId):
+def videosIds(key, channelId, order):
 
     # COMMENTS
     ## Pandas data frame
-    df = search.videosDataFrame(key, channelId) # DataFrame with 21 rows
+    df = search.videosDataFrame(key, channelId, order) # DataFrame with 21 rows
     df = search.dropColumns(df) # Dropping some columns
     df = search.dropRows(df) # Dropping missing id values
     search.dataFrameToCSV(df)
@@ -38,8 +39,7 @@ def youtubeComments(key, videosIds):
 
     ct.dataFrameToCSV(df, False)
 
-def commentsPerChannel(key, channelId):
-    videoId = videosIds(key, channelId)
+def commentsByChannel(key, channelId, order):
+    videoId = videosIds(key, channelId, order)
 
     youtubeComments(key, videoId)
-    print("FINISHED!")

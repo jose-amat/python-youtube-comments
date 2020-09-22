@@ -60,7 +60,7 @@ def repliesDataFrame(key, videoId):
   return df
 
 def dropColumns(df):
-    dropCol = ['authorProfileImageUrl', 'authorChannelUrl', 'authorChannelId', 'canRate', 'viewerRating']
+    dropCol = []
     
     for col in dropCol:
         df = df.drop(col, 1)
