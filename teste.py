@@ -1,6 +1,6 @@
 import functions.youtube_api as yb
 
-key = ''
-playlist = ''
+key = 'AIzaSyDazwNBxt816APtEYPQl5jAGg0YTRwQyPM'
+playlist = 'PLlBw3F15IXehbaG16XZ0eokoNWDKjFzQ-'
 
 videos = yb.commentsByPlaylist(key, playlist)

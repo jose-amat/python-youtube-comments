@@ -7,7 +7,7 @@ def callAPI(key, playlist):
   return requests.get('https://www.googleapis.com/youtube/v3/playlistItems',
               params={
                   'key': key,
-                  'part': 'contentDetails',
+                  'part': 'snippet,contentDetails',
                   'playlistId': playlist,
                   'maxResults': 20
               })
@@ -19,8 +19,7 @@ def videosDataFrame(key, playlist):
   videolist = []
   for video in response:
     statistics = videos.statistics(key, video['contentDetails']['videoId'])
-    videolist.append({**video['contentDetails'], **statistics})
-  
+    videolist.append({**video['snippet']['resourceId'], **video['snippet'], **statistics})  
   return pd.DataFrame(videolist)
 
 def dataFrameToCSV(df):
