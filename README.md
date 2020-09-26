@@ -4,12 +4,16 @@ This script will help you to extract the youtube comments from a video. We are c
 
 ## How to execute?
 
-
+### Videos By Channel Id
 ```bash
-$ python UI.py
+$ python3 UI_byChannelId.py
+```
+### Videos By Playlist Id
+```bash
+$ python3 UI_byPlaylist.py
 ```
 
-![](media/vscode_environment.png)
+![](media/vscode_environment_version2.0.png)
 
 ## Note
 - You have to pass a youtube key. To create it please see [here](https://developers.google.com/youtube/v3/docs).
