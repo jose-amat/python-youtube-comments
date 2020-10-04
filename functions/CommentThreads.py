@@ -24,7 +24,7 @@ def parentsDataFrame(key, videoId):
       json = response.json()
 
       for value in json['items']:
-          snippet.append(value['snippet']['topLevelComment']['snippet'])
+          snippet.append({**value['snippet']['topLevelComment'], **value['snippet']['topLevelComment']['snippet']})
       
       nextToken = json['nextPageToken'] if 'nextPageToken' in json.keys() and (len(json['items']) > 0) else None
 
