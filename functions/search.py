@@ -31,9 +31,10 @@ def videosDataFrame(key, channelId, order):
     json = response.json()
     snippet = []    
     for value in json['items']:
-        statistics = videos.statistics(key, value['id']['videoId'])
-        snippet.append({**value['id'], **value['snippet'], **statistics})
-        print(value['id'])
+        if 'videoId' in value['id'].keys():
+            statistics = videos.statistics(key, value['id']['videoId'])
+            snippet.append({**value['id'], **value['snippet'], **statistics})
+            print(value['id'])
 
     df = pd.DataFrame(snippet)    
     return df
